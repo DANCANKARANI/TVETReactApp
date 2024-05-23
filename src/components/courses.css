@@ -1,0 +1,39 @@
+.department-components{
+               background: #ffffff;
+               display: flex;
+               padding: 10%;
+               margin-right: 0.5em;
+               
+}
+.department-card {
+               border: 1px solid #ccc; /* Add border for card-like appearance */
+               padding: 20px; /* Add padding for spacing within the card */
+               margin: 10px; /* Add margin for spacing between the cards */
+               border-radius: 5px; /* Optional: add rounded corners for a more card-like appearance */
+               background-color: #f9f9f9; /* Optional: add background color for the cards */
+               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add box shadow for a slight elevation effect */
+               flex: 1;
+}
+
+.courses-headline {
+               text-align: center;
+               font: bold;
+}
+             
+.courses-headline.appear {
+  opacity: 0; /* Make the headline appear with opacity 1 */
+  transition: opacity 2s ease;
+              
+  transition: opacity 10s ease;
+  opacity: 1;            
+}
+.department-components a {
+  text-decoration: none;
+               
+}
+li{
+  font-size:30px;
+  padding: 4px;
+}
+             
+           
