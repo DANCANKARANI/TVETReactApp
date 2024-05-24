@@ -4,12 +4,13 @@ import {Home}  from './Home.jsx';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import { Footer } from './Footer.jsx';
 import {Courses} from './Courses.jsx';
-import { Jobs } from '../Jobs.jsx';
+
 import { Sponsors } from '../Sponsors.jsx';
 import { Fee } from '../Fee.jsx';
 
 import {Agriculture} from './Agriculture';
-
+import jobs from "../jobs"
+import { AvailableJobs } from '../Jobs.jsx';
 {/*images*/}
 import agric1 from './images/agric1.jpg'
 import agric2 from './images/agric2.jpg'
@@ -24,6 +25,7 @@ import ict2 from './images/ict2.jpg'
 import electrical1 from './images/electrical1.jpg'
 import electrical2 from './images/electrical2.jpg'
 
+
 export const Homepage = () => {
   return (
 <div>
@@ -34,7 +36,17 @@ export const Homepage = () => {
         <Route exact path="/" element={<Home/>}/>
         
         <Route path="/careers" element={<Courses/>}/>
-        <Route path="/jobs" element={<Jobs/>}/>
+
+
+        <Route path="/jobs" element={jobs.map(available=>
+        <AvailableJobs
+          key={available.key}
+          job={available.job}
+          role={available.role}
+          apply={available.apply}
+        />)}/>
+
+
         <Route path="/sponsors" element={<Sponsors/>}/>
         <Route path="/fee" element={<Fee/>}/>
         {/*Agriculture department*/}

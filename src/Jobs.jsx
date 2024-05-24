@@ -1,7 +1,33 @@
 import React from 'react'
+import "./jobs.css"
 
-export const Jobs = () => {
+export const AvailableJobs = (props) => {
+
   return (
-    <div>Jobs</div>
+    <div className='jobscomponent'>
+      <div className="jobsheader">
+          <div className='column'>
+            Title
+          </div>
+          <div className='column'>
+            Qualification
+          </div>
+          <div className='column'>
+            Application link
+          </div>
+      </div>
+      <div className="jobs">
+      <div className="column one">
+         {props.job}
+        </div>
+        <div className="column two">
+          {props.role}
+        </div>
+        <div className="column three">
+           <a href={props.apply}>Apply</a>
+        </div>
+      </div>
+      
+    </div>
   )
 }
