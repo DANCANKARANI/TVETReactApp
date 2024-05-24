@@ -18,7 +18,7 @@ const jobs=[
         apply:"https://www.google.com/"
     },
     {
-        key:3,
+        key:4,
         job:"Mechanic",
         role:"Diploma in mechanical engineering",
         apply:"https://www.google.com/"

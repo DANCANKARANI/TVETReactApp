@@ -5,7 +5,7 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import { Footer } from './Footer.jsx';
 import {Courses} from './Courses.jsx';
 
-import { Sponsors } from '../Sponsors.jsx';
+import { Availablesponsors } from '../Sponsors.jsx';
 import { Fee } from '../Fee.jsx';
 
 import {Agriculture} from './Agriculture';
@@ -24,7 +24,7 @@ import ict1 from './images/ict1.jpg'
 import ict2 from './images/ict2.jpg'
 import electrical1 from './images/electrical1.jpg'
 import electrical2 from './images/electrical2.jpg'
-
+import Sponsors from '../sponsors.js'
 
 export const Homepage = () => {
   return (
@@ -37,7 +37,7 @@ export const Homepage = () => {
         
         <Route path="/careers" element={<Courses/>}/>
 
-
+        {/*The jobs route*/}
         <Route path="/jobs" element={jobs.map(available=>
         <AvailableJobs
           key={available.key}
@@ -46,8 +46,18 @@ export const Homepage = () => {
           apply={available.apply}
         />)}/>
 
+          {/*The sponsors route */}
+        <Route path="/sponsors" element={Sponsors.map(available =>
+          <Availablesponsors
+          name={available.name}
+          type={available.type}
+          apply={available.apply}
+          />
+        )}/>
 
-        <Route path="/sponsors" element={<Sponsors/>}/>
+
+
+
         <Route path="/fee" element={<Fee/>}/>
         {/*Agriculture department*/}
         <Route exact path='/careers/agric-dpt' element={<Agriculture
