@@ -1,11 +1,11 @@
 package database
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"main.go/model"
 )
 
-func AddSponsors(c *fiber.Ctx){
+func AddSponsors(c *fiber.Ctx)error{
 	Sponsor:=model.Sponsor{}
 	db:=ConnectDB()
 	defer db.Close()
@@ -18,14 +18,16 @@ func AddSponsors(c *fiber.Ctx){
 		Type: Sponsor.Type,
 		Apply: Sponsor.Apply,
 	})
-	c.JSON(Sponsor)
+	return c.JSON(Sponsor)
+	
 }
 
-func ViewSponsors(c *fiber.Ctx){
+func ViewSponsors(c *fiber.Ctx)error{
 	db :=ConnectDB()
 	defer db.Close()
 	AvailableSponsors := []model.Sponsor{}
 	if err := db.Raw("SELECT * FROM sponsors").Scan(&AvailableSponsors).Error; err!=nil {
-		c.Status(fiber.StatusInternalServerError).JSON(err)
+		return c.Status(fiber.StatusInternalServerError).JSON(err)
 	}
+	return c.JSON(AvailableSponsors)
 }

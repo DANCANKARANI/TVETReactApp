@@ -1,10 +1,10 @@
 package database
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"main.go/model"
 )
-func AddJobs(c *fiber.Ctx){
+func AddJobs(c *fiber.Ctx)error{
 	Job:=model.Job{}
 	db:=ConnectDB()
 	defer db.Close()
@@ -22,14 +22,14 @@ func AddJobs(c *fiber.Ctx){
 	})
 	//creating the table in the database
 	
-	c.JSON(Job)
+	return c.JSON(Job)
 }
-func ViewJobs(c *fiber.Ctx){
+func ViewJobs(c *fiber.Ctx)error{
 	AvailableJobs := []model.Job{}
 	db :=ConnectDB()
 	defer db.Close()
 	if err :=db.Raw("SELECT * FROM jobs").Scan(&AvailableJobs).Error; err != nil {
 		c.Status(fiber.StatusInternalServerError).JSON(err)
 	}
-	c.JSON(AvailableJobs)
+	return c.JSON(AvailableJobs)
 }

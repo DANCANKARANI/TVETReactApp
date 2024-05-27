@@ -1,11 +1,11 @@
 package database
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"main.go/model"
 )
 
-func AddCourses(c *fiber.Ctx){
+func AddCourses(c *fiber.Ctx)error{
 	Course:=model.Course{}
 	db :=ConnectDB()
 	defer db.Close()
@@ -20,16 +20,16 @@ func AddCourses(c *fiber.Ctx){
 		KcseGrade: Course.KcseGrade,
 		Subjects: Course.Subjects,
 	})
-	c.JSON(Course)
+	return c.JSON(Course)
 }
 
-func ViewCourses(c *fiber.Ctx){
+func ViewCourses(c *fiber.Ctx)error{
 	AvailableCourses:=[]model.Course{}
 	db:= ConnectDB()
 	defer db.Close()
 	if err := db.Raw("SELECT * FROM courses").Scan(&AvailableCourses).Error; err != nil{
 		c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
-        return
+        return c.JSON(err)
 	}
-	c.JSON(AvailableCourses)
+	return c.JSON(AvailableCourses)
 }

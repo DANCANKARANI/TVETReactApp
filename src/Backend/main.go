@@ -2,15 +2,20 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2"
 	"main.go/database"
 )
 
 func main() {
-
+	
 	fmt.Println("connected")
 	app := fiber.New()
+	 // Apply CORS middleware
+	 app.Use(cors.New(cors.Config{
+        AllowOrigins: "*",
+        AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
+    }))
 	//Post requests
 	app.Post("/me",database.AddJobs)
 	app.Post("/add-sponsors",database.AddSponsors)
