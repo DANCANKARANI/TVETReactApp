@@ -5,12 +5,11 @@ import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import { Footer } from './Footer.jsx';
 import {Courses} from './Courses.jsx';
 
-import Sponsors from '../sponsors'
-import { Availablesponsors } from '../Sponsors.jsx';
+
 import { Fee } from '../Fee.jsx';
 
 import {Agriculture} from './Agriculture';
-import jobs from "../jobs"
+
 import { AvailableJobs } from '../Jobs.jsx';
 {/*images*/}
 import agric1 from './images/agric1.jpg'
@@ -25,6 +24,8 @@ import ict1 from './images/ict1.jpg'
 import ict2 from './images/ict2.jpg'
 import electrical1 from './images/electrical1.jpg'
 import electrical2 from './images/electrical2.jpg'
+import FetchJobs from '../FetchJobs.jsx';
+import { FetchSponsors } from '../FetchSponsors.jsx';
 
 
 export const Homepage = () => {
@@ -39,22 +40,10 @@ export const Homepage = () => {
         <Route path="/careers" element={<Courses/>}/>
 
         {/*The jobs route*/}
-        <Route path="/jobs" element={jobs.map(available=>
-        <AvailableJobs
-          key={available.key}
-          job={available.job}
-          role={available.role}
-          apply={available.apply}
-        />)}/>
+        <Route path="/jobs" element={<FetchJobs/>}/>
 
           {/*The sponsors route */}
-        <Route path="/sponsors" element={Sponsors.map(available =>
-          <Availablesponsors
-          name={available.name}
-          type={available.type}
-          apply={available.apply}
-          />
-        )}/>
+        <Route path="/sponsors" element={<FetchSponsors/>}/>
 
 
 
@@ -121,7 +110,9 @@ export const Homepage = () => {
         img2={ict2}
         />}></Route>
       </Routes>
+     
   <div>
+          <Footer/>
     <Footer/>
   </div>
 </div>

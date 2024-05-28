@@ -18,7 +18,7 @@ export const AvailableJobs = (props) => {
       </div>
       <div className="jobs">
       <div className="column one">
-         {props.job}
+         {props.title}
         </div>
         <div className="column two">
           {props.role}

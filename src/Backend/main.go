@@ -29,5 +29,5 @@ func main() {
 	app.Get("/view/courses",database.ViewCourses)
 	app.Get("/view/sponsors",database.ViewSponsors)
 
-	app.Listen(":5173")
+	app.Listen(":8000")
 }
