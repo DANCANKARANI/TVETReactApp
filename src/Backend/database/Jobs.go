@@ -1,6 +1,8 @@
 package database
 
 import (
+
+
 	"github.com/gofiber/fiber/v2"
 	"main.go/model"
 )
@@ -28,8 +30,24 @@ func ViewJobs(c *fiber.Ctx)error{
 	AvailableJobs := []model.Job{}
 	db :=ConnectDB()
 	defer db.Close()
-	if err :=db.Raw("SELECT * FROM jobs").Scan(&AvailableJobs).Error; err != nil {
+	if err :=db.Raw("SELECT * FROM jobs SORT").Scan(&AvailableJobs).Error; err != nil {
 		c.Status(fiber.StatusInternalServerError).JSON(err)
 	}
 	return c.JSON(AvailableJobs)
+}
+func UpdateJobs(c *fiber.Ctx)error{
+	id :=c.Params("id")
+	Job:=model.Job{}
+	if err:=c.BodyParser(&Job);err!=nil{
+		c.JSON("Failed to pass data")
+	}
+
+	db :=ConnectDB()
+	defer db.Close()
+	db.Model(&Job ).Where("id=?",id).Update(&model.Job{
+		Title: Job.Title,
+		Role: Job.Role,
+		Apply: Job.Apply,
+	})
+	return c.JSON(Job)
 }
